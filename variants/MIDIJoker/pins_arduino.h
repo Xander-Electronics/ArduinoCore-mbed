@@ -49,14 +49,17 @@ extern "C" unsigned int PINCOUNT_fn();
 
 extern PinName digitalPinToPinName(pin_size_t P);
 
-// LEDs
+// Multiplexers
 // ----
-#define PIN_LED     (13u)
-#define LED_BUILTIN PIN_LED
-#define LEDR        (22u)
-#define LEDG        (23u)
-#define LEDB        (24u)
-#define LED_PWR     (25u)
+#define MUX1_A    5
+#define MUX1_B    13
+#define MUX1_C    23
+#define MUX1_D    22
+
+#define MUX2_A    2
+#define MUX2_B    4
+#define MUX2_C    6
+#define MUX2_D    9
 
 // Analog pins
 // -----------
@@ -95,6 +98,15 @@ static const uint8_t A7  = PIN_A7;
 #define D12 (12u)
 #define D13 (13u)
 
+// WS2812B pin
+// -----------
+#define PIXEL_PIN (29)
+
+// Relays pins
+// -----------
+#define RLY1 (10)
+#define RLY2 (12)
+
 /*
  * Serial interfaces
  */
@@ -119,17 +131,6 @@ static const uint8_t SCK  = PIN_SPI_SCK;
 
 #define PIN_WIRE_SDA1       (30u)
 #define PIN_WIRE_SCL1       (31u)
-
-#define PIN_ENABLE_I2C_PULLUP      (32u)
-#define PIN_ENABLE_SENSORS_3V3     (33u)
-
-#define PIN_INT_APDS (26u)
-
-// PDM Interfaces
-// ---------------
-#define PIN_PDM_PWR	 (27)
-#define PIN_PDM_CLK	 (28)
-#define PIN_PDM_DIN	 (29)
 
 // These serial port names are intended to allow libraries and architecture-neutral
 // sketches to automatically default to the correct port name for a particular type
@@ -160,8 +161,8 @@ static const uint8_t SCK  = PIN_SPI_SCK;
 #define SERIAL_CDC			1
 #define HAS_UNIQUE_ISERIAL_DESCRIPTOR
 #define BOARD_VENDORID		0x2341
-#define BOARD_PRODUCTID		0x805a
-#define BOARD_NAME			"Nano 33 BLE"
+#define BOARD_PRODUCTID		0x905a
+#define BOARD_NAME			"MIDI Joker"
 
 #define DFU_MAGIC_SERIAL_ONLY_RESET   0xb0
 
