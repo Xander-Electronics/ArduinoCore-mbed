@@ -152,10 +152,8 @@ void initVariant() {
 
   // FIXME: always enable I2C pullup and power @startup
   // Change for maximum powersave
-  pinMode(PIN_ENABLE_SENSORS_3V3, OUTPUT);
   pinMode(PIN_ENABLE_I2C_PULLUP, OUTPUT);
 
-  digitalWrite(PIN_ENABLE_SENSORS_3V3, HIGH);
   digitalWrite(PIN_ENABLE_I2C_PULLUP, HIGH);
 
   // Disable UARTE0 which is initially enabled by the bootloader
