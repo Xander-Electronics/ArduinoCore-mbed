@@ -115,10 +115,10 @@ static const uint8_t A7  = PIN_A7;
 #define PIN_SERIAL_TX (0ul)
 
 // SPI
-#define PIN_SPI_MISO  (12u)
-#define PIN_SPI_MOSI  (11u)
-#define PIN_SPI_SCK   (13u)
-#define PIN_SPI_SS    (10u)
+#define PIN_SPI_MISO  (31u)
+#define PIN_SPI_MOSI  (30u)
+#define PIN_SPI_SCK   (19u)
+#define PIN_SPI_SS    (18u)
 
 static const uint8_t SS   = PIN_SPI_SS;   // SPI Slave SS not used. Set here only for reference.
 static const uint8_t MOSI = PIN_SPI_MOSI;
