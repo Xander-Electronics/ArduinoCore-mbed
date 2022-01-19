@@ -146,6 +146,12 @@ void initVariant() {
   nrf_rtc_event_disable(NRF_RTC1, NRF_RTC_INT_COMPARE0_MASK);
   nrf_rtc_int_disable(NRF_RTC1, NRF_RTC_INT_COMPARE0_MASK);
 
+  // FIXME: always enable I2C pullup and power @startup
+  // Change for maximum powersave
+  pinMode(PIN_ENABLE_I2C_PULLUP, OUTPUT);
+
+  digitalWrite(PIN_ENABLE_I2C_PULLUP, HIGH);
+
   // Disable UARTE0 which is initially enabled by the bootloader
   nrf_uarte_task_trigger(NRF_UARTE0, NRF_UARTE_TASK_STOPRX); 
   while (!nrf_uarte_event_check(NRF_UARTE0, NRF_UARTE_EVENT_RXTO)) ; 

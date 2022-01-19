@@ -1,6 +1,6 @@
 #include <Control_Surface.h>
 
-USBMIDI_Interface midi;             //Init MIDI over USB
+BluetoothMIDI_Interface midi;             //Init MIDI over USB
 
 CD74HC4067 mux0_15 = {
   A0,                               //Analog pin
@@ -14,10 +14,10 @@ CD74HC4067 mux16_31 = {
 /*
  * - When the button on pin is pressed, a MIDI Control Change message with a 
  *   value of 0x7F (127) is sent
- * - When the button on pin is released, a MIDI Control Change message with a 
+ * - When the button on pin is pressed again, a MIDI Control Change message with a 
  *   value of 0x00 (0) is sent
  */
-CCButton buttons0_15[] = {
+CCButtonLatched buttons0_15[] = {
   { mux0_15.pin(0),   {1, CHANNEL_1}},
   { mux0_15.pin(1),   {2, CHANNEL_1}},
   { mux0_15.pin(2),   {3, CHANNEL_1}},
@@ -36,7 +36,7 @@ CCButton buttons0_15[] = {
   { mux0_15.pin(15),  {16, CHANNEL_1}}
 };
 
-CCButton buttons16_31[] = {
+CCButtonLatched buttons16_31[] = {
   { mux16_31.pin(0),   {17, CHANNEL_1}},
   { mux16_31.pin(1),   {18, CHANNEL_1}},
   { mux16_31.pin(2),   {19, CHANNEL_1}},
