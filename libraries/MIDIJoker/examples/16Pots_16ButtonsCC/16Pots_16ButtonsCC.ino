@@ -1,4 +1,21 @@
 #include <Control_Surface.h>
+#include <APA102.h>
+
+// Define which pins to use.
+const uint8_t dataPin = A2;
+const uint8_t clockPin = A3;
+
+// Create an object for writing to the LED strip.
+APA102<dataPin, clockPin> ledStrip;
+
+// Set the number of LEDs to control.
+const uint16_t ledCount = 16;
+
+// Create a buffer for holding the colors (3 bytes per color).
+rgb_color colors[ledCount];
+
+// Set the brightness to use (the maximum is 31).
+const uint8_t brightness = 5;
 
 USBMIDI_Interface midi;             //Init MIDI over USB
 
@@ -12,11 +29,11 @@ CD74HC4067 muxButtons = {
   {MUX2_A, MUX2_B, MUX2_C, MUX2_D}  //Address pins
 };
 /*
- * - When the button on pin is pressed, a MIDI Control Change message with a 
- *   value of 0x7F (127) is sent
- * - When the button on pin is pressed again, a MIDI Control Change message with a 
- *   value of 0x00 (0) is sent
- */
+   - When the button on pin is pressed, a MIDI Control Change message with a
+     value of 0x7F (127) is sent
+   - When the button on pin is pressed again, a MIDI Control Change message with a
+     value of 0x00 (0) is sent
+*/
 
 CCButtonLatched buttons0_15[] = {
   { muxButtons.pin(0),   {17, CHANNEL_1}},
@@ -62,4 +79,16 @@ void setup() {
 
 void loop() {
   Control_Surface.loop();
+
+  for (uint16_t i = 0; i < ledCount; i++) {
+    if (buttons0_15[i].getState()) {
+      colors[i] = rgb_color(255, 255, 0);
+    }
+    else {
+      colors[i] = rgb_color(0, 0, 0);
+    }
+  }
+
+  ledStrip.write(colors, ledCount, brightness);
+
 }
