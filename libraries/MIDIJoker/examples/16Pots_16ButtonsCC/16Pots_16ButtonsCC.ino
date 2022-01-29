@@ -73,6 +73,10 @@ CCPotentiometer potentiometers0_15[] = {
   { muxPots.pin(15),  {16, CHANNEL_1}}
 };
 
+bool oldStatus[16] = {0};
+
+bool ledUpdate = false;
+
 void setup() {
   Control_Surface.begin();
 }
@@ -81,14 +85,21 @@ void loop() {
   Control_Surface.loop();
 
   for (uint16_t i = 0; i < ledCount; i++) {
-    if (buttons0_15[i].getState()) {
-      colors[i] = rgb_color(255, 255, 0);
-    }
-    else {
-      colors[i] = rgb_color(0, 0, 0);
+    if (buttons0_15[i].getState() != oldStatus[i]) {
+      oldStatus[i] = buttons0_15[i].getState();
+      ledUpdate = true;
+
+      if (oldStatus[i]) {
+        colors[i] = rgb_color(255, 255, 0);
+      }
+      else {
+        colors[i] = rgb_color(0, 0, 0);
+      }
     }
   }
 
-  ledStrip.write(colors, ledCount, brightness);
-
+  if (ledUpdate) {
+    ledUpdate = false;
+    ledStrip.write(colors, ledCount, brightness);
+  }
 }
